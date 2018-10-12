@@ -33,8 +33,6 @@ def get_dates(date):
         dates.append(end_date)
         return dates
 
-    return date
-
 
 def bills(first_date, last_date):
     """Shows basic usage of the Google Calendar API.
@@ -46,6 +44,8 @@ def bills(first_date, last_date):
     start = first_date + 'T00:00:00Z'
     end = last_date + 'T00:00:00.00Z'
     bills_list = ''
+    mortgage = 0
+
     if not creds or creds.invalid:
         flow = client.flow_from_clientsecrets('models/credentials.json', SCOPES)
         creds = tools.run_flow(flow, store)
