@@ -8,7 +8,7 @@ SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
 
 
 def main():
-    dates = format_date('10-12-2018')
+    dates = get_dates('10-12-2018')
     print(dates)
     start_date = dates[0]
     end_date = dates[1]
@@ -18,7 +18,7 @@ def main():
         print(bills(start_date, end_date))
 
 
-def format_date(date):
+def get_dates(date):
     date_elements = date.split('-')
     dates = []
     if len(date_elements) < 3:

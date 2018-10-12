@@ -31,10 +31,10 @@ class Commands:
         """Lists bills due between two dates supplied. (ex: 2018-09-1 2018-09-14)"""
         if start_date is None:
             await self.bot.say("I need to know the dates for the bills you want (ex: 2018-09-1 2018-09-14). ")
-        dates = bills.format_date('10-12-2018')
-        print(dates)
+        dates = bills.get_dates(start_date)
         start_date = dates[0]
         end_date = dates[1]
+        print('Getting bills beginning from ' + start_date + ' to ' + end_date)
         message = bills.bills(start_date, end_date)
         await self.bot.say(message)
 
