@@ -1,14 +1,17 @@
 from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
+from datetime import timedelta, datetime
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
 
 
 def main():
-    start_date = format_date('10-12-2018')
-    end_date = format_date('10-26-2018')
+    dates = format_date('10-12-2018')
+    print(dates)
+    start_date = dates[0]
+    end_date = dates[1]
     if start_date is False or end_date is False:
         print('Invalid Date Format')
     else:
@@ -17,18 +20,18 @@ def main():
 
 def format_date(date):
     date_elements = date.split('-')
-    new_date_elements = []
+    dates = []
     if len(date_elements) < 3:
         return False
     if len(date_elements[0]) < 4:
         if len(date_elements[2]) < 4:
             return False
-
-        new_date_elements.append(date_elements[2] + '-')
-        new_date_elements.append(date_elements[0] + '-')
-        new_date_elements.append(date_elements[1])
-        date = ''.join(new_date_elements)
-        return date
+        date = datetime.strptime(date, "%m-%d-%Y")
+        end_date = (date + timedelta(days=14)).strftime("%Y-%m-%d")
+        start_date = date.strftime("%Y-%m-%d")
+        dates.append(start_date)
+        dates.append(end_date)
+        return dates
 
     return date
 

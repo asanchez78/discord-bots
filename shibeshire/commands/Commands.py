@@ -27,12 +27,14 @@ class Commands:
     #         await self.bot.delete_message(ctx.message)
 
     @commands.command(pass_context=True)
-    async def bills(self, ctx, start_date=None, end_date=None):
+    async def bills(self, ctx, start_date=None):
         """Lists bills due between two dates supplied. (ex: 2018-09-1 2018-09-14)"""
-        if start_date is None or end_date is None:
+        if start_date is None:
             await self.bot.say("I need to know the dates for the bills you want (ex: 2018-09-1 2018-09-14). ")
-        start_date = bills.format_date(start_date)
-        end_date = bills.format_date(end_date)
+        dates = bills.format_date('10-12-2018')
+        print(dates)
+        start_date = dates[0]
+        end_date = dates[1]
         message = bills.bills(start_date, end_date)
         await self.bot.say(message)
 
