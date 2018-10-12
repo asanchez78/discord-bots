@@ -8,8 +8,8 @@ SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
 
 
 def main():
-    dates = get_dates('10-12-2018')
-    print(dates)
+    start_date = input("Enter the first date: ")
+    dates = get_dates(start_date)
     start_date = dates[0]
     end_date = dates[1]
     if start_date is False or end_date is False:
