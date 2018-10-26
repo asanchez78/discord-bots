@@ -1,5 +1,5 @@
-import random
 import argparse
+import secrets
 
 
 def main():
@@ -8,9 +8,9 @@ def main():
     parser.add_argument('-id', '--wordid', help='The numbers manually rolled with a d6', required=False)
     args = parser.parse_args()
 
-    word_list = 'eff_short_wordlist_2_0.txt'
+    word_list = 'diceware.wordlist.asc'
 
-    word_id_length = 4
+    word_id_length = 5
 
     diceware = Diceware(word_list, word_id_length)
 
@@ -18,7 +18,8 @@ def main():
         word = diceware.get_single_word(args.wordid)
         print('The word for {} is {}'.format(args.wordid, word))
     else:
-        number = random.randint(0, 100)
+        number_generator = secrets.SystemRandom()
+        number = number_generator.randint(0, 100)
         diceware.generate_wordlist(args.words)
         wordlist = diceware.get_word_list()
         print('Your {} words are "{}" and your random number is {}'.format(args.words, wordlist, number))
@@ -36,11 +37,12 @@ class Diceware:
         """- This method will return the number of words passed"""
         num_of_words = int(num_of_words)
         word_id = ''
+        number_generator = secrets.SystemRandom()
         # derive x number of words
         for x in range(num_of_words):
             # words in the list are numbered. roll six-sided dice to get the word number
             for y in range(self.__word_id_length):
-                die_roll = random.randint(1, 6)
+                die_roll = number_generator.randrange(1, 7)
                 # concatenate each die roll to form a word id
                 word_id = word_id + str(die_roll)
             # call lookup_word function to retrieve the word corresponding to the word id generated
