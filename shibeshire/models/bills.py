@@ -41,7 +41,7 @@ def bills(first_date, last_date):
     store = file.Storage('models/token.json')
     creds = store.get()
     total = 0
-    start = first_date + 'T00:00:00Z'
+    start = first_date + 'T08:00:00Z'
     end = last_date + 'T00:00:00.00Z'
     bills_list = ''
     mortgage = 0
