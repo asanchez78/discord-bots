@@ -76,7 +76,7 @@ def bills(first_date, last_date):
     half = (total / 2 + mortgage)
     half = str(half)
     total_with_mortgage = total + mortgage
-    return bills_list + 'total = ' + str(total_with_mortgage) + '\nhalf = ' + half
+    return bills_list + 'total bills plus mortgage = ' + str(total_with_mortgage) + '\nhalf bills plus mortgage = ' + half
 
 
 if __name__ == '__main__':
