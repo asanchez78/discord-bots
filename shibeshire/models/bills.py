@@ -71,13 +71,13 @@ def bills(first_date, last_date):
 
             if bill == 'Mortgage - ':
                 bills_list += entry + '\n'
-                mortgage = int(amount[1])
+                mortgage = float(amount[1])
 
     half = (total / 2 + mortgage)
-    half = str(half)
+    half = "{:.2f}".format(half)
     total_with_mortgage = total + mortgage
     return bills_list + 'total bills plus mortgage = ' + str(total_with_mortgage) + '\nhalf bills plus mortgage = ' \
-        + half
+        + str(half)
 
 
 if __name__ == '__main__':
