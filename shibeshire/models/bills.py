@@ -71,7 +71,7 @@ def bills(first_date, last_date):
 
             if bill == 'Mortgage - ':
                 bills_list += entry + '\n'
-                mortgage = int(amount[1])
+                mortgage = float(amount[1])
 
     half = (total / 2 + mortgage)
     half = str(half)
