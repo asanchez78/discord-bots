@@ -65,8 +65,10 @@ def bills(first_date, last_date):
         if len(amount) > 1:
             entry = due_date + ' ' + event['summary']
             if bill != 'Mortgage - ':
-                total = total + float(amount[1])
-                # bills_list.append(entry)
+                try:
+                    total = total + float(amount[1])
+                except ValueError:
+                    print("Error parsing bill amount")
                 bills_list += entry + '\n'
 
             if bill == 'Mortgage - ':
