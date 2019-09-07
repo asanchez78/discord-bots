@@ -7,3 +7,4 @@ config.py
 eff_short_wordlist_2_0.txt
 bot_start.sh
 *.log
+data.db

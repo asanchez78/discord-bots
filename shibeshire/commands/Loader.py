@@ -1,7 +1,7 @@
 from discord.ext import commands
 
 
-class Loader:
+class Loader(commands.Cog):
     """Used to manually load and unload bot modules"""
     def __init__(self, bot):
         self.bot = bot

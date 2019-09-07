@@ -7,7 +7,7 @@ from models.diceware import Diceware
 # import discord
 
 
-class Commands:
+class Commands(commands.Cog):
     """Utility commands"""
     def __init__(self, bot):
         self.bot = bot
