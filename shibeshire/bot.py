@@ -18,7 +18,7 @@ async def on_ready():
 
 async def my_background_task(self):
     await self.wait_until_ready()
-    channel = self.get_channel(404099078708789250)  # channel ID goes here
+    channel = self.get_channel(config.reminders_channel)
     reminder = Reminder()
     db = Database()
     while not self.is_closed():
