@@ -1,6 +1,7 @@
 import time
 from datetime import datetime
 from models.database import Database
+import threading
 
 
 def main():
@@ -8,7 +9,7 @@ def main():
     reminder_text = "buy the thing"
     sender_id = 322817848894291968
     reminder = Reminder()
-    # reminder.log_reminder(sender_id, reminder_time, reminder_text)
+    reminder.log_reminder(sender_id, reminder_time, reminder_text)
     # reminders = reminder.get_reminders_by_sender_id()
     # reminder.del_reminder_by_db_id(5)
     # for result in reminders:
@@ -25,8 +26,8 @@ def main():
             reminder.get_all_reminders()
             time.sleep(5)
             print(reminder.get_reminders_by_sender_id(322817848894291968))
-    # reminder_watcher = threading.Thread(target=reminder_watcher_thread)
-    # reminder_watcher.start()
+    reminder_watcher = threading.Thread(target=reminder_watcher_thread)
+    reminder_watcher.start()
     print("I'm still doing stuff while the thread goes on")
 
 
@@ -36,15 +37,11 @@ class Reminder:
         self.current_date = str(datetime.now().year) + "-" + str(datetime.now().month) + "-" + str(datetime.now().day)
         self.current_time = datetime.now()
 
-    def get_reminders_by_sender_id(self, sender_id):
+    @staticmethod
+    def get_reminders_by_sender_id(sender_id):
         db = Database()
         reminders = db.get_reminders_by_sender_id(sender_id)
         return reminders
-
-    def send_reminder(self, reminder_time, reminder_text):
-        while self.current_time < reminder_time:
-            time.sleep(1)
-        print(reminder_text)
 
     @staticmethod
     def is_valid_reminder_time(reminder_time):
