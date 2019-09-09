@@ -39,6 +39,16 @@ class Database:
         except Exception as err:
             print(err)
 
+    def get_reminder_by_id(self, reminder_id):
+        query = "SELECT * FROM reminders WHERE id={}".format(reminder_id)
+        try:
+            self.cursor.execute(query)
+            result = self.cursor.fetchone()
+            return result
+        except Exception as err:
+            print(err)
+            return False
+
     def delete_reminder(self, reminder_id):
         delete_query = "DELETE FROM reminders WHERE id={}".format(reminder_id)
         print(delete_query)

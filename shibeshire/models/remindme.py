@@ -44,6 +44,21 @@ class Reminder:
         return reminders
 
     @staticmethod
+    def get_reminder_by_id(reminder_id):
+        db = Database()
+        task = db.get_reminder_by_id(reminder_id)
+        return task
+
+    @staticmethod
+    def del_reminder_by_id(reminder_id):
+        db = Database()
+        try:
+            db.delete_reminder(reminder_id)
+            return True
+        except Exception:
+            return False
+
+    @staticmethod
     def is_valid_reminder_time(reminder_time):
         try:
             time.strptime(str(reminder_time), '%m-%d-%Y %H:%M')
@@ -51,7 +66,7 @@ class Reminder:
                 return "Reminder time is in the past."
             return True
         except ValueError:
-            return False
+            return "Invalid reminder time."
 
     def log_reminder(self, sender_id, reminder_time, reminder_text):
         if self.is_valid_reminder_time(reminder_time):
