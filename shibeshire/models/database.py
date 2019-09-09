@@ -8,7 +8,7 @@ def main():
 
 class Database:
     def __init__(self):
-        self.connection = sqlite3.connect('data.db')
+        self.connection = sqlite3.connect('../data.db')
         self.cursor = self.connection.cursor()
 
     def log_reminder(self, sender_id, timestamp, reminder_text):
