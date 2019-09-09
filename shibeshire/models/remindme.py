@@ -68,7 +68,7 @@ class Reminder:
             return "Invalid timestamp"
 
     @staticmethod
-    def get_all_reminders(delete=True):
+    def get_all_reminders(delete=False):
         db = Database()
         reminders = db.get_all_reminders()
         past_reminders = []
