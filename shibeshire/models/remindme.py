@@ -1,4 +1,4 @@
-import threading, time
+import time
 from datetime import datetime
 from models.database import Database
 
