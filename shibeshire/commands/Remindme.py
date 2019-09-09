@@ -15,7 +15,8 @@ class Remindme(commands.Cog):
         reminder = Reminder()
         if reminder.is_valid_reminder_time(time) is True:
             reminder.log_reminder(sender_id, time, reminder_text)
-            await ctx.send('Setting a reminder for {} to {} at {}'.format(ctx.message.author.mention, reminder_text, time))
+            await ctx.send('Setting a reminder for {} to {} at {}'
+                           .format(ctx.message.author.mention, reminder_text, time))
         else:
             await ctx.send(reminder.is_valid_reminder_time(time))
 

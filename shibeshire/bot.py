@@ -12,12 +12,13 @@ bot = commands.Bot(description="This is my hello world bot", command_prefix="/")
 async def on_ready():
     bot.load_extension("commands.Loader")
     bot.load_extension("commands.Commands")
-    bot.load_extension(("commands.Remindme"))
+    bot.load_extension("commands.Remindme")
     bot.loop.create_task(my_background_task(bot))
+
 
 async def my_background_task(self):
     await self.wait_until_ready()
-    channel = self.get_channel(404099078708789250) # channel ID goes here
+    channel = self.get_channel(404099078708789250)  # channel ID goes here
     reminder = Reminder()
     db = Database()
     while not self.is_closed():
@@ -30,7 +31,7 @@ async def my_background_task(self):
                 print(result[0])
                 db.delete_reminder(result[0])
                 await channel.send("<@{}>, it's time to {}".format(result[2], result[3]))
-        await asyncio.sleep(5) # task runs every 5 seconds
+        await asyncio.sleep(5)  # task runs every 5 seconds
 
 print('Initializing bot ' + str(datetime.now()))
 bot.run(config.bot_token)

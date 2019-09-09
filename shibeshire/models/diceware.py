@@ -2,6 +2,7 @@ import argparse
 # import secrets
 import random
 
+
 def main():
     parser = argparse.ArgumentParser(description='Gives a word list')
     parser.add_argument('-w', '--words', help='Number of words', required=False)
@@ -18,8 +19,8 @@ def main():
         word = diceware.get_single_word(args.wordid)
         print('The word for {} is {}'.format(args.wordid, word))
     else:
-        #number_generator = secrets.SystemRandom()
-        #number = number_generator.randint(0, 100)
+        # number_generator = secrets.SystemRandom()
+        # number = number_generator.randint(0, 100)
         number = random.randint(0, 100)
         diceware.generate_wordlist(args.words)
         wordlist = diceware.get_word_list()

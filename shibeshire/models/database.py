@@ -1,8 +1,9 @@
 import sqlite3
 
+
 def main():
     database = Database()
-    #database.log_reminder(4643453, "08-05-2019 13:00", "Do Something")
+    # database.log_reminder(4643453, "08-05-2019 13:00", "Do Something")
     database.delete_reminder(7)
 
 
@@ -20,7 +21,6 @@ class Database:
         except Exception as err:
             print(err)
 
-
     def get_reminders_by_sender_id(self, sender_id):
         query = "SELECT * FROM reminders where sender_id={}".format(sender_id)
         try:
@@ -30,7 +30,6 @@ class Database:
         except Exception as err:
             print(err)
 
-
     def get_all_reminders(self):
         query = "SELECT * FROM reminders"
         try:
@@ -39,7 +38,6 @@ class Database:
             return result
         except Exception as err:
             print(err)
-
 
     def delete_reminder(self, reminder_id):
         delete_query = "DELETE FROM reminders WHERE id={}".format(reminder_id)

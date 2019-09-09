@@ -2,7 +2,6 @@ from discord.ext import commands
 import random
 from models import bills
 from models.diceware import Diceware
-import asyncio
 
 
 # import discord
@@ -58,7 +57,7 @@ class Commands(commands.Cog):
             words.generate_wordlist(num_of_words)
             wordlist = words.get_word_list()
             await ctx.send('{}, your {} words are "{}" and your random number is {}'
-                               .format(str(ctx.message.author), num_of_words, wordlist, number))
+                           .format(str(ctx.message.author), num_of_words, wordlist, number))
 
 
 def setup(bot):
