@@ -41,7 +41,16 @@ class Reminder:
     def get_reminders_by_sender_id(sender_id):
         db = Database()
         reminders = db.get_reminders_by_sender_id(sender_id)
-        return reminders
+        reminder_list = []
+        task_list = ''
+        if reminders:
+            for reminder in reminders:
+                id = str(reminder[0])
+                time = reminder[1]
+                task = reminder[3]
+                reminder_list.append(id + '. ' + time + ' ' + task)
+            task_list = '\n'.join(reminder_list)
+        return task_list
 
     @staticmethod
     def get_reminder_by_id(reminder_id):
