@@ -1,5 +1,4 @@
 from discord.ext import commands
-import asyncio
 from models.remindme import Reminder
 
 
@@ -9,7 +8,7 @@ class Remindme(commands.Cog):
         self.bot = bot
         print("Reminder Loaded")
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def remindme(self, ctx, time, reminder_text):
         """Sets a reminder"""
         sender_id = ctx.message.author.id

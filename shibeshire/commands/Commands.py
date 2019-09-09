@@ -42,7 +42,7 @@ class Commands(commands.Cog):
         message = bills.bills(start_date, end_date)
         await ctx.send(message)
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def wordlist(self, ctx, num_of_words=None):
         word_file = 'models/eff_short_wordlist_2_0.txt'
         """Generates a list of words using the diceware method"""
