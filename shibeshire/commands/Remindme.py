@@ -1,4 +1,5 @@
 from discord.ext import commands
+import discord
 from models.remindme import Reminder
 
 
@@ -39,6 +40,22 @@ class Remindme(commands.Cog):
             await ctx.send("Reminder was deleted")
         else:
             await ctx.send("No task with that ID found.")
+
+    @commands.group()
+    async def remind(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await ctx.send('Invalid sub command passed...')
+
+    @remind.group(name='at')
+    async def task_time(self, ctx, time):
+        if ctx.invoked_subcommand is None:
+            await ctx.send('Invalid sub command passed at ...')
+        await ctx.send(time)
+
+    @task_time.command(name='to')
+    async def task_text(self, ctx, task_text):
+        msg = 'Finally got success {0.author.mention}'.format(ctx.message)
+        await ctx.send(task_text)
 
 
 def setup(bot):
