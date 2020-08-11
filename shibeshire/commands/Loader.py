@@ -1,4 +1,5 @@
 from discord.ext import commands
+import asyncio
 
 
 class Loader(commands.Cog):
@@ -8,23 +9,27 @@ class Loader(commands.Cog):
         print("Manual Module Loader Initialized")
 
     @commands.command()
-    async def load(self, module):
+    @asyncio.coroutine
+    def load(self, ctx, module):
         """Load a bot module."""
         self.bot.load_extension(module)
-        await self.bot.say("Loading")
+        yield from ctx.send("Loading")
 
     @commands.command()
-    async def unload(self, module):
+    @asyncio.coroutine
+    def unload(self, ctx, module):
         """Unload a bot module."""
+        print("Module = " + module)
         self.bot.unload_extension(module)
-        await self.bot.say("Unloading")
+        yield from ctx.send("Unloading")
 
     @commands.command()
-    async def reload(self, module):
+    @asyncio.coroutine
+    def reload(self, ctx, module):
         """Reload a bot module."""
         self.bot.unload_extension(module)
         self.bot.load_extension(module)
-        await self.bot.say("Reloading")
+        yield from ctx.send("Reloading")
 
 
 def setup(bot):
