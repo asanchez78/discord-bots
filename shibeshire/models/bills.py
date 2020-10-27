@@ -8,7 +8,8 @@ SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
 
 
 def main():
-    start_date = input("Enter the first date: ")
+    # start_date = input("Enter the first date: ")
+    start_date = '11-6-2020'
     dates = get_dates(start_date)
     start_date = dates[0]
     end_date = dates[1]
@@ -19,6 +20,7 @@ def main():
 
 
 def get_dates(date):
+    # accepts a date as input. returns a list with two elemets; the date entered and the date two weeks in the future
     date_elements = date.split('-')
     dates = []
     if len(date_elements) < 3:
@@ -45,6 +47,7 @@ def bills(first_date, last_date):
     end = last_date + 'T00:00:00.00Z'
     bills_list = ''
     mortgage = 0
+    entry = ''
 
     if not creds or creds.invalid:
         flow = client.flow_from_clientsecrets('models/credentials.json', SCOPES)
@@ -62,24 +65,25 @@ def bills(first_date, last_date):
         amount = event_str.split("$")
         bill = amount[0]
 
+        # if amount array has more than one element, it has a bill amount
         if len(amount) > 1:
-            entry = due_date + ' ' + event['summary']
+            # if the bill is not mortgage, divide it by two and add it to the total
             if bill != 'Mortgage - ':
                 try:
-                    total = total + float(amount[1])
+                    half_amount = round(float(amount[1]) / 2, 2)
+                    total = total + half_amount
                 except ValueError:
                     print("Error parsing bill amount")
+                entry = f"{due_date} {bill}{half_amount}"
                 bills_list += entry + '\n'
-
+            # if the bill is mortgage, just add the amount to the total
             if bill == 'Mortgage - ':
-                bills_list += entry + '\n'
                 mortgage = float(amount[1])
+                entry = f"{due_date} {bill}{amount[1]}"
+                bills_list += entry + '\n'
+                total = total + mortgage
 
-    half = (total / 2 + mortgage)
-    half = "{:.2f}".format(half)
-    total_with_mortgage = total + mortgage
-    return bills_list + 'total bills plus mortgage = ' + str(total_with_mortgage) + '\nhalf bills plus mortgage = ' \
-        + str(half)
+    return bills_list + 'total = ' + str(total)
 
 
 if __name__ == '__main__':
