@@ -82,7 +82,7 @@ def bills(first_date, last_date):
                 entry = f"{due_date} {bill}{amount[1]}"
                 bills_list += entry + '\n'
                 total = total + mortgage
-
+    total = round(total, 2)
     return bills_list + 'total = ' + str(total)
 
 
