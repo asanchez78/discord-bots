@@ -47,7 +47,7 @@ class Commands(commands.Cog):
             words.generate_wordlist(num_of_words)
             wordlist = words.get_word_list()
             yield from ctx.send('{}, your {} words are "{}" and your random number is {}'
-                               .format(str(ctx.message.author), num_of_words, wordlist, number))
+                                .format(str(ctx.message.author), num_of_words, wordlist, number))
 
 
 def setup(bot):
