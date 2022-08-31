@@ -20,7 +20,7 @@ def main():
 
 
 def get_dates(date):
-    # accepts a date as input. returns a list with two elemets; the date entered and the date two weeks in the future
+    # accepts a date as input. returns a list with two elements; the date entered and the date two weeks in the future
     date_elements = date.split('-')
     dates = []
     if len(date_elements) < 3:
