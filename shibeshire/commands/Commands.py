@@ -14,21 +14,6 @@ class Commands(commands.Cog):
         self.bot = bot
         print("Commands Loaded")
 
-    # @commands.command(pass_context=True)
-    # async def say(self, ctx, *, something=None):
-    #     """This command will repeat what you tell it to"""
-    #
-    #     if something is None:
-    #         await self.bot.say("What would you like me to say?")
-    #     else:
-    #         dest_channel = discord.utils.get(ctx.message.server.channels, name="testing",
-    #                                          type=discord.ChannelType.text)
-    #         print(dest_channel.id)
-    #
-    #         await self.bot.say("**{} said:** {}".format(str(ctx.message.author), something))
-    #         await self.bot.send_message(discord.Object(id=dest_channel.id), something)
-    #         await self.bot.delete_message(ctx.message)
-
     @commands.command()
     @asyncio.coroutine
     def bills(self, ctx, start_date=None):
