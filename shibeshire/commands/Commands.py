@@ -1,11 +1,8 @@
 from discord.ext import commands
 import random
 import asyncio
-from models import bills
+from models import ynab_bills
 from models.diceware import Diceware
-
-
-# import discord
 
 
 class Commands(commands.Cog):
@@ -20,15 +17,18 @@ class Commands(commands.Cog):
         """Lists bills due within two weeks of the entered date."""
         if start_date is None:
             yield from ctx.send("I need to know the date for the bills you want (ex: 10-12-2018).")
-
-        dates = bills.get_dates(start_date)
-        start_date = dates[0]
-        end_date = dates[1]
-        print(start_date)
-        print(end_date)
-        print('Getting bills beginning from ' + start_date + ' to ' + end_date)
-        message = bills.bills(start_date, end_date)
-        yield from ctx.send(message)
+        else:
+            try:
+                # take the start date and get the date 13 days out
+                dates = ynab_bills.get_dates(start_date)
+                start_date = dates[0]
+                end_date = dates[1]
+                print('Getting bills beginning from ' + start_date + ' to ' + end_date)
+                # get the list of bills
+                message = ynab_bills.get_bills(start_date, end_date)
+                yield from ctx.send(message)
+            except TypeError:
+                yield from ctx.send("Invalid date format (ex: 10-12-2018).")
 
     @commands.command(pass_context=True)
     @asyncio.coroutine
