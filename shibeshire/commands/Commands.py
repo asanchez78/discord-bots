@@ -1,8 +1,10 @@
 from discord.ext import commands
 import random
 import asyncio
+from datetime import datetime
 from models import ynab_bills
 from models.diceware import Diceware
+import config
 
 
 class Commands(commands.Cog):
@@ -20,14 +22,15 @@ class Commands(commands.Cog):
         else:
             try:
                 # take the start date and get the date 13 days out
-                dates = ynab_bills.get_dates(start_date)
+                dates = ynab_bills.get_dates(first_date=start_date)
                 start_date = dates[0]
                 end_date = dates[1]
-                print('Getting bills beginning from ' + start_date + ' to ' + end_date)
+                print('Getting bills beginning from ' + str(start_date) + ' to ' + str(end_date))
                 # get the list of bills
                 message = ynab_bills.get_bills(start_date, end_date)
                 yield from ctx.send(message)
-            except TypeError:
+            except ValueError as err:
+                print(err)
                 yield from ctx.send("Invalid date format (ex: 10-12-2018).")
 
     @commands.command(pass_context=True)
