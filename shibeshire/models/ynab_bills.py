@@ -1,3 +1,4 @@
+from typing_extensions import Required
 import requests
 from datetime import timedelta, datetime
 from time import strptime
@@ -10,7 +11,7 @@ def main():
 
 
 @click.command()
-@click.option("--start-date", "-d", type=str)
+@click.option("--start-date", "-d", type=str, required=True)
 def cli(start_date):
     try:
         dates = get_dates(start_date)
