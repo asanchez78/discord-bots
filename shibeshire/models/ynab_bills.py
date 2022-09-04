@@ -2,17 +2,24 @@ import requests
 from datetime import timedelta, datetime
 from time import strptime
 import config
+import click
 
 
 def main():
+    cli(prog_name="ynab")
+
+
+@click.command()
+@click.option("--start-date", "-d", type=str)
+def cli(start_date):
     try:
-        start_date = input("Enter the first date: ")
-        start_date = datetime.strptime(start_date, config.time_format)
         dates = get_dates(start_date)
         start_date = dates[0]
         end_date = dates[1]
 
-        print(get_bills(start_date, end_date))
+        message = get_bills(start_date, end_date)
+        click.echo("Sending bills list to discord")
+        send_to_discord(message)
     except ValueError as err:
         print(err)
 
@@ -74,7 +81,21 @@ def get_bills(first_date: datetime, last_date: datetime) -> str:
             total += amount
 
     total = round(total, 2)
-    return f"Bills due between {first_date} and {last_date}\n" + bills_list + 'total = ' + str(total)
+    return f"Bills due between {first_date.strftime('%m-%d')} and {last_date.strftime('%m-%d')}\n" + bills_list + 'total = ' + str(total)
+
+
+def send_to_discord(bills_list):
+    message = {
+            "username": "Beels",
+            "embeds": [
+                {
+                    "title": bills_list,
+                    "color": 1206538
+                }
+            ]
+        }
+
+    requests.post(url=config.webhook_url, headers={"Content-Type": "application/json"}, json=message)
 
 
 if __name__ == '__main__':
