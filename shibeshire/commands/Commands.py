@@ -1,10 +1,8 @@
 from discord.ext import commands
 import random
 import asyncio
-from datetime import datetime
 from models import ynab_bills
 from models.diceware import Diceware
-import config
 
 
 class Commands(commands.Cog):

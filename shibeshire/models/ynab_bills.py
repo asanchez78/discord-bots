@@ -1,4 +1,3 @@
-from typing_extensions import Required
 import requests
 from datetime import timedelta, datetime
 from time import strptime
