@@ -1,8 +1,8 @@
 from discord.ext import commands
 import random
 import asyncio
-from models import ynab_bills
-from models.diceware import Diceware
+from modules import ynab_bills
+from modules.diceware import Diceware
 
 
 class Commands(commands.Cog):

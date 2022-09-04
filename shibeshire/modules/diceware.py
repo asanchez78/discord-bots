@@ -2,6 +2,7 @@ import argparse
 # import secrets
 import random
 
+
 def main():
     parser = argparse.ArgumentParser(description='Gives a word list')
     parser.add_argument('-w', '--words', help='Number of words', required=False)
