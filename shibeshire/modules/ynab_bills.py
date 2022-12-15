@@ -31,7 +31,7 @@ def get_dates(first_date: str) -> list:
     dates = []
 
     try:
-        end_date = first_date + timedelta(days=13)
+        end_date = first_date + timedelta(days=14)
         dates.append(first_date)
         dates.append(end_date)
         return dates
