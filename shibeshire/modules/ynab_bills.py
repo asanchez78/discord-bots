@@ -60,7 +60,10 @@ def get_bills(first_date: datetime, last_date: datetime) -> str:
         due_day = int(entry["note"])
         bill = entry["name"]
         # ynab does't store the decimal so divide by 1000 and then divide by 2 since we split bills
-        amount = round(entry["goal_target"]/1000/2, 2)
+        if bill != 'ATT Wireless':
+            amount = round(entry["goal_target"]/1000/2, 2)
+        else:
+            amount = round(entry["goal_target"]/1000, 2)
 
         # only the day is kept in ynab so that it doesn't have to be edited every month
         # if the due day is less than the first day, the due date is in the next month
